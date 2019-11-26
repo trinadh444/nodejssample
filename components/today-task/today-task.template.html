@@ -1,0 +1,173 @@
+<style>
+    .todo-row {
+        /* border-top: solid #efefef 0.25px;*/
+        border-bottom: solid #efefef 0.25px;
+        padding: 10px 0px 10px 0px;
+    }
+
+    blockquote {
+        margin: 0px !important;
+    }
+
+    .blockquote {
+        font-size: 1rem !important;
+    }
+
+    #todo-checkbox {
+        text-align: center;
+        display: inline-block;
+    }
+
+    .todo-add-btn {
+        margin-top: 2rem;
+    }
+</style>
+<div class="jumbotron text-center">
+    <h3>{{today_date | date:'yyyy-MMM-dd'}}
+        <span class="badge badge-primary">3</span>
+    </h3>
+</div>
+
+
+<!-- ToDo list -->
+<!-- <div id="todo-list">
+
+    <table class="table table-striped">
+        <tbody>
+            <tr ng-repeat="data in formData">
+                <td class="text-center">
+                    <div class="custom-control custom-checkbox">
+                        <input type="checkbox" ng-model="data.status" class="custom-control-input" id="customCheck"
+                            name="example1">
+                        <label class="custom-control-label" for="customCheck"></label>
+                    </div>
+                </td>
+                <td><input type="text" readonly class="form-control-plaintext" id="staticTaskDesc"
+                        value="{{data.task_desc}}"></td>
+                <td><input type="text" readonly class="form-control-plaintext text-center" id="staticTaskDate"
+                        value="{{data.date}}"></td>
+                <td><input type="text" readonly class="form-control-plaintext text-center" id="staticTaskTime"
+                        value="{{data.hour + ':' + data.minute}}"></td>
+                <td class="text-center">
+                    <div class="btn-group" role="group" aria-label="Basic example">
+                        <button type="button" class="btn btn-warning"><i class="fa fa-undo"></i></button>
+                        <button type="button" class="btn btn-info"><i class="fa fa-pencil"></i></button>
+                        <button type="button" class="btn btn-danger"><i class="fa fa-trash"></i></button>
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div> -->
+<!-- newly added -->
+<div class="todo-2">
+    <div class="row todo-row" ng-repeat="data in formData | orderBy: ['hour', 'minute']">
+        <div id="todo-checkbox" class="col-sm-1 col-1 text-center ">
+                <input type="checkbox" class="" ng-model="data.status" ng-click="todoGetValue(data.task_desc, data.status)">
+            <!-- <div class="custom-control custom-checkbox">
+                <label class="custom-control-label" for="customCheck">
+                        <input type="checkbox" class="custom-control-input" id="customCheck" ng-model="data.status" ng-click="todoGetValue()" name="example1">
+                </label>
+            </div> -->
+        </div>
+        <div class="col-sm-10 col-9">
+            <blockquote class="blockquote">
+                <p class="mb-0">{{data.task_desc}}</p>
+                <footer class="blockquote-footer">{{data.date | date:'yyyy-MMM-dd'}} <cite
+                        title="{{data.hour + ':' + data.minute}}">{{data.hour + ':' + data.minute}}</cite></footer>
+            </blockquote>
+        </div>
+        <div class="col-sm-1 col-2 text-center">
+            <div><button type="button" class="btn btn-outline-danger btm-sm"><i class="fa fa-trash"></i></button></div>
+        </div>
+    </div>
+</div>
+
+<!-- <div class="row" ng-repeat="data in formData">
+        <div class="col-sm-1 text-center">
+            <div class="custom-control custom-checkbox mb-3">
+                <input type="checkbox" ng-model="data.status" class="custom-control-input" id="customCheck"
+                    name="example1">
+                <label class="custom-control-label" for="customCheck"></label>
+            </div>
+        </div>
+        <div class="col-sm-5">
+            <input type="text" readonly class="form-control-plaintext" id="staticTaskDesc"
+                value="{{data.task_desc}}">
+        </div>
+        <div class="col-sm-2">
+            <input type="text" readonly class="form-control-plaintext text-center" id="staticTaskDate"
+                value="{{data.date}}">
+        </div>
+        <div class="col-sm-2">
+            <input type="text" readonly class="form-control-plaintext text-center" id="staticTaskTime"
+                value="{{data.hour + ':' + data.minute}}">
+        </div>
+        <div class="col-sm-2 text-center">
+            <div class="btn-group" role="group" aria-label="Basic example">
+                <button type="button" class="btn btn-warning"><i class="fa fa-undo"></i></button>
+                <button type="button" class="btn btn-info"><i class="fa fa-pencil"></i></button>
+                <button type="button" class="btn btn-danger"><i class="fa fa-trash"></i></button>
+            </div>
+        </div>
+    </div> -->
+
+
+<!-- Button trigger modal -->
+<div class="row todo-add-btn">
+    <div class="col text-center">
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+            Add new task
+        </button>
+    </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Add New Task</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="form-group row">
+                        <label for="taskDesc" class="col-sm-2 col-form-label">Task Desc</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" ng-model="todoData.task_desc" id="taskDesc"
+                                placeholder="Task Desc">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="staticDate" class="col-sm-2 col-form-label">Date</label>
+                        <div class="col-sm-10">
+                            <input type="text" readonly class="form-control-plaintext" id="staticDate"
+                                value="{{today_date | date:'yyyy-MMM-dd Z'}}">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="taskTime" class="col-sm-2 col-form-label">Time</label>
+                        <div class="col">
+                            <input type="number" class="form-control" ng-model="todoData.hour" min="00" max="23"
+                                id="tastaskTime" placeholder="00-23">
+                        </div>:
+                        <div class="col">
+                            <input type="number" class="form-control" ng-model="todoData.minute" min="00" max="55"
+                                step="5" id="tastaskTime" placeholder="00-55">
+                        </div>
+                    </div>
+
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" ng-click="addTodayTask(todoData)"
+                    data-dismiss="modal">Add</button>
+            </div>
+        </div>
+    </div>
+</div>

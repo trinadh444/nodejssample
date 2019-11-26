@@ -1,0 +1,39 @@
+<div id="incomplete-todo-list" ng-repeat="(key, value) in formData | groupBy: 'date'">
+        <h3>{{key}}</h3>
+
+        <table class="table table-striped">
+            <!-- <thead>
+                      <tr>
+                        <th></th>
+                        <th>Task Description</th>
+                        <th>Date</th>
+                        <th>Time</th>
+                        <th></th>
+                      </tr>
+                    </thead> -->
+            <tbody>
+                <tr ng-repeat="data in formData">
+                    <td class="text-center">
+                        <div class="custom-control custom-checkbox">
+                            <input type="checkbox" ng-model="data.status" class="custom-control-input" id="customCheck"
+                                name="example1">
+                            <label class="custom-control-label" for="customCheck"></label>
+                        </div>
+                    </td>
+                    <td><input type="text" readonly class="form-control-plaintext" id="staticTaskDesc"
+                            value="data.task_desc"></td>
+                    <td><input type="text" readonly class="form-control-plaintext text-center" id="staticTaskDate"
+                            value="data.date"></td>
+                    <td><input type="text" readonly class="form-control-plaintext text-center" id="staticTaskTime"
+                            value="data.hour + ':' + data.minute"></td>
+                    <td class="text-center">
+                        <div class="btn-group" role="group" aria-label="Basic example">
+                            <button type="button" class="btn btn-warning"><i class="fa fa-undo"></i></button>
+                            <!-- <button type="button" class="btn btn-info"><i class="fa fa-pencil"></i></button> -->
+                            <button type="button" class="btn btn-danger"><i class="fa fa-trash"></i></button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>

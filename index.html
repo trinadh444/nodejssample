@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myApp">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+
+    <!-- bootstrap -->
+    <link rel="stylesheet" href="resources/bootstrap.min.css">
+    <link rel="stylesheet" href="resources/font-awesome.min.css">
+
+    <!-- <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"> -->
+    <!-- stylesheet -->
+    <link rel="stylesheet" href="style.css">
+
+    <script src="resources/angular.min.js"></script>
+    <script src="resources/angular-route.min.js"></script>
+    <script src="resources/jquery-3.4.1.min.js"></script>
+    <!-- bootstrap -->
+    <script src="resources/popper.min.js"></script>
+    <script src="resources/bootstrap.min.js"></script>
+</head>
+
+<body ng-controller="myCtrl">
+    <!-- <nav class="navbar navbar-expand-lg navbar-light bg-light"> -->
+    <nav class="navbar navbar-expand-lg bg-primary navbar-dark">
+        <!-- navbar navbar-expand-sm bg-primary navbar-dark -->
+        <a class="navbar-brand" href="#">ToDo List</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
+            aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+            <div class="navbar-nav">
+                <a class="nav-item nav-link active" href="#!/">Today's Task<span class="sr-only">(current)</span></a>
+                <a class="nav-item nav-link" href="#!/incomplete-task">Incomplete Task</a>
+                <!-- <a class="nav-item nav-link" href="#!/old-task">Old Task</a> -->
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+
+        <div ng-view></div>
+    </div>
+
+
+
+
+
+
+
+
+    <!-- script     -->
+    <!-- <script src="script.js"></script> -->
+    <script src="app.module.js"></script>
+    <script src="app.config.js"></script>
+    <script src="components/today-task/today-task.module.js"></script>
+    <script src="components/today-task/today-task.component.js"></script>
+    <script src="components/incomplete-task/incomplete-task.module.js"></script>
+    <script src="components/incomplete-task/incomplete-task.component.js"></script>
+    <script src="components/old-task/old-task.module.js"></script>
+    <script src="components/old-task/old-task.component.js"></script>
+    <script>
+        var header = document.getElementById("navbarNavAltMarkup");
+        var nav_items = header.getElementsByClassName("nav-item nav-link");
+        for (var i = 0; i < nav_items.length; i++) {
+            nav_items[i].addEventListener("click", function () {
+                var current = document.getElementsByClassName("active");
+                current[0].className = current[0].className.replace(" active", "");
+                this.className += " active";
+            });
+        }
+    </script>
+</body>
+
+</html>

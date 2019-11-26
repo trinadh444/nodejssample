@@ -1,0 +1,10 @@
+#todo-list>.row{
+    border-bottom: 0.25px solid #efefef ;
+}
+.table td, .table th{
+    padding: 0.15rem !important;
+}
+.custom-control{
+    margin-top: 6px;
+    margin-left: 6px;
+}
